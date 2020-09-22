@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  text-align: center;
+}
+
+.label {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+.input {
+  padding: 4px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid transparent;
+}
+
+/* .input:valid {
+  border: 2px solid rgb(4, 175, 4);
+  border-radius: 5px;
+}
+.input:invalid {
+  border: 2px solid red;
+  border-radius: 5px;
+} */
+
+.button {
+  color: aliceblue;
+  width: 140px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+  font-size: 14px;
+  background-color: rgba(139, 0, 0, 0.815);
+  border-radius: 3px;
+  height: 30px;
+  border-color: transparent;
+}
