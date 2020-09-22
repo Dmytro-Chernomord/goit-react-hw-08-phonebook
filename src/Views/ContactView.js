@@ -14,6 +14,7 @@ class ContactView extends Component {
   }
 
   render() {
+    console.log(this.props.filter);
     return (
       <>
         <CSSTransition
@@ -37,7 +38,7 @@ class ContactView extends Component {
           <SearchInput />
         </CSSTransition>
         {this.props.isContactLoading && <h2>Loading...</h2>}
-        <PhoneList onDelete={this.deleteTask} />
+        <PhoneList />
       </>
     );
   }
@@ -47,6 +48,7 @@ const mapStateToProps = state => {
   return {
     items: contactsSelector.getItems(state),
     isContactLoading: contactsSelector.isLoading(state),
+    filter: contactsSelector.getFilter(state),
   };
 };
 
