@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import s from './Form.module.css';
+import authOperations from '../redux/auth/authOperation';
 
-export default class LoginView extends Component {
+class LoginView extends Component {
   state = {
-    mail: '',
+    email: '',
     password: '',
   };
 
@@ -13,10 +15,9 @@ export default class LoginView extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+    this.props.login({ ...this.state });
 
-    // this.props.onLogin(this.state);
-
-    this.setState({ mail: '', password: '' });
+    this.setState({ email: '', password: '' });
   };
   render() {
     return (
@@ -26,9 +27,9 @@ export default class LoginView extends Component {
           <input
             className={s.input}
             onChange={this.handleOnChange}
-            name="mail"
-            value={this.state.mail}
-            type="mail"
+            name="email"
+            value={this.state.email}
+            type="email"
             required
           />
         </label>
@@ -50,3 +51,5 @@ export default class LoginView extends Component {
     );
   }
 }
+
+export default connect(null, { login: authOperations.logIn })(LoginView);

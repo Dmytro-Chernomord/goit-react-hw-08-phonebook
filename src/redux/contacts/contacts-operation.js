@@ -18,9 +18,7 @@ const fetchContacs = () => dispatch => {
     .then(response =>
       dispatch(contactsAction.fetchContactsSuccess(response.data)),
     )
-    .catch(error =>
-      dispatch(contactsAction.fetchContactsError(console.log(error))),
-    );
+    .catch(error => dispatch(contactsAction.fetchContactsError(error)));
 };
 
 const deleteContact = id => dispatch => {

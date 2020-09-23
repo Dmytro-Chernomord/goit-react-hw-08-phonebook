@@ -6,6 +6,22 @@ body {
   height: 100vh;
 }
 
+a {
+  text-decoration: none;
+  color: rgba(139, 0, 0, 1);
+  font-size: 26px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: tomato;
+  border-radius: 5px;
+}
+
+a:hover {
+  color: brown;
+  background-color: burlywood;
+}
+
 button {
   display: inline-block;
 }

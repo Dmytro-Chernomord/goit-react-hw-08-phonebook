@@ -14,7 +14,6 @@ class ContactView extends Component {
   }
 
   render() {
-    console.log(this.props.filter);
     return (
       <>
         <CSSTransition
