@@ -23,10 +23,13 @@ const registration = userData => dispatch => {
 const logIn = userData => dispatch => {
   dispatch(authAction.loginRequest());
 
-  axios.post('/users/login', userData).then(response => {
-    setToken(response.data.token);
-    dispatch(authAction.loginSuccess(response.data));
-  });
+  axios
+    .post('/users/login', userData)
+    .then(response => {
+      setToken(response.data.token);
+      dispatch(authAction.loginSuccess(response.data));
+    })
+    .catch(error => dispatch(authAction.loginError(error)));
 };
 
 const logOut = () => dispatch => {
@@ -41,4 +44,23 @@ const logOut = () => dispatch => {
     .catch(error => dispatch(authAction.logoutError(error)));
 };
 
-export default { registration, logIn, logOut };
+const getUser = () => (dispatch, getState) => {
+  const {
+    auth: { token: lokalToken },
+  } = getState();
+  if (lokalToken === '') {
+    return;
+  }
+  setToken(lokalToken);
+
+  dispatch(authAction.getCurrentUserRequest());
+
+  axios
+    .get('/users/current')
+    .then(response => {
+      dispatch(authAction.getCurrentUserSuccess(response.data));
+    })
+    .catch(error => dispatch(authAction.getCurrentUserError(error)));
+};
+
+export default { registration, logIn, logOut, getUser };

@@ -18,15 +18,31 @@ const userDataReducer = createReducer(dataInitialState, {
     name: null,
     email: null,
   }),
+  [actions.getCurrentUserSuccess]: (_, actions) => ({
+    ...actions.payload,
+  }),
 });
 
-const tokenReducer = createReducer('', {
+const tokenReducer = createReducer(null, {
   [actions.registrationSuccess]: (_, action) => action.payload.token,
   [actions.loginSuccess]: (_, action) => action.payload.token,
-  [actions.logoutSuccess]: (_, __) => '',
+  [actions.logoutSuccess]: (_, __) => null,
+});
+
+const errorReducer = createReducer(null, {
+  // [actions.getCurrentUserError]: (_, action) => action.payload,
+  [actions.loginError]: (_, action) => action.payload,
+  [actions.logoutError]: (_, action) => action.payload,
+  [actions.registrationError]: (_, action) => action.payload,
+  [actions.logoutSuccess]: () => null,
+  [actions.loginSuccess]: () => null,
+  [actions.getCurrentUserSuccess]: () => null,
+  [actions.registrationSuccess]: () => null,
+  [actions.clearError]: () => null,
 });
 
 export default combineReducers({
   user: userDataReducer,
   token: tokenReducer,
+  error: errorReducer,
 });

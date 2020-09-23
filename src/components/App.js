@@ -1,8 +1,16 @@
 import { Switch } from 'react-router-dom';
 import React, { Component, Suspense, lazy } from 'react';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Header from './Header/Header';
 import routes from '../routes';
+import authOperations from '../redux/auth/authOperation';
+import PrivateRoute from '../redux/auth/PrivateRoute';
+import PublicRoute from '../redux/auth/PublicRoute';
+import FirstRoute from '../redux/auth/FirstRoute';
+import Error from '../components/Error/Error';
+import authActions from '../redux/auth/authAction';
+import authSelectors from '../redux/auth/authSelector';
 
 const ContactView = lazy(() =>
   import('../Views/ContactView' /* webpackChunkName: "contact-view" */),
@@ -15,20 +23,50 @@ const RegisterView = lazy(() =>
 );
 
 class App extends Component {
+  componentDidMount() {
+    if (this.props.token) {
+      this.props.auth();
+    }
+    this.props.clearError();
+  }
   render() {
     return (
       <>
         <Header />
+        {this.props.error && <Error />}
         <Suspense fallback={<h1>Loading</h1>}>
           <Switch>
-            <Route path={routes.contacts} component={ContactView} />
-            <Route path={routes.login} component={LoginView} />
-            <Route path={routes.register} component={RegisterView} />
+            <PrivateRoute
+              exact
+              path={routes.contacts}
+              component={ContactView}
+            />
+            <PublicRoute
+              path={routes.login}
+              restricted={true}
+              component={LoginView}
+            />
+            <PublicRoute
+              path={routes.register}
+              restricted={true}
+              component={RegisterView}
+            />
+            <FirstRoute />
+            {/* <Redirect to="/login" /> */}
           </Switch>
         </Suspense>
       </>
     );
   }
 }
+const mapStateToProps = state => ({
+  error: state.auth.error,
+  token: authSelectors.isAuth(state),
+});
 
-export default App;
+const mapDispatchToProps = {
+  auth: authOperations.getUser,
+  clearError: () => authActions.clearError,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -14,7 +14,7 @@ export class Form extends Component {
   // };
   state = {
     name: '',
-    tel: '',
+    number: '',
     alert: false,
   };
   inputChannge = e => {
@@ -31,15 +31,15 @@ export class Form extends Component {
     } else {
       const nameTel = {
         name: this.state.name,
-        tel: this.state.tel,
+        number: this.state.number,
       };
       //fix
       this.props.onSubmit(nameTel);
-      this.setState({ name: '', tel: '' });
+      this.setState({ name: '', number: '' });
     }
   };
   render() {
-    const { name, tel } = this.state;
+    const { name, number } = this.state;
     return (
       <>
         <CSSTransition
@@ -72,8 +72,8 @@ export class Form extends Component {
               pattern="^[0-9-+\s()]*$"
               title="[0-9]"
               type="tel"
-              name="tel"
-              value={tel}
+              name="number"
+              value={number}
               onChange={this.inputChannge}
               required
             />

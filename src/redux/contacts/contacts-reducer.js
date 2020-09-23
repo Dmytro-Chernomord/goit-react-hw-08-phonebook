@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import actions from './contact-action';
+import authAction from '../auth/authAction';
 
 const itemsReducer = createReducer([], {
   [actions.addContactSuccess]: (state, action) => [...state, action.payload],
@@ -10,6 +11,7 @@ const itemsReducer = createReducer([], {
     ...state,
     ...action.payload,
   ],
+  [authAction.logoutSuccess]: () => [],
 });
 
 const filterReducer = createReducer('', {

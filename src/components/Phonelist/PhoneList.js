@@ -12,12 +12,12 @@ const PhoneList = props => {
   return (
     <TransitionGroup component="ul" className={s.ul}>
       {items.map(el => {
-        const { tel, name, id } = el;
+        const { number, name, id } = el;
         return (
           <CSSTransition key={id} in timeout={250} unmountOnExit classNames={s}>
             <li key={id} className={s.li}>
               <span className={s.p}>
-                {name}: <span className={s.p}>{tel}</span>
+                {name}: <span className={s.p}>{number}</span>
               </span>
 
               <button
