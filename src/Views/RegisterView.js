@@ -31,6 +31,7 @@ class RegisterView extends Component {
             name="name"
             value={this.state.name}
             type="text"
+            placeholder="Name"
           />
         </label>
         <label className={s.label}>
@@ -41,16 +42,18 @@ class RegisterView extends Component {
             name="email"
             value={this.state.email}
             type="email"
+            placeholder="Email"
           />
         </label>
         <label className={s.label}>
-          Passwort{' '}
+          Password{' '}
           <input
             className={s.input}
             onChange={this.handleOnChange}
             name="password"
             value={this.state.password}
             type="password"
+            placeholder="Password"
           />
         </label>
         <button className={s.button} type="submit">

@@ -30,22 +30,24 @@ class LoginView extends Component {
             name="email"
             value={this.state.email}
             type="email"
+            placeholder="Email"
             required
           />
         </label>
         <label className={s.label}>
-          Passwort{' '}
+          Password{' '}
           <input
             className={s.input}
             onChange={this.handleOnChange}
             name="password"
             value={this.state.password}
             type="password"
+            placeholder="Password"
             required
           />
         </label>
         <button className={s.button} type="submit">
-          Sign up
+          Log in
         </button>
       </form>
     );
