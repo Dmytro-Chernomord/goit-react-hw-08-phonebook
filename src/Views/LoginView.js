@@ -23,9 +23,9 @@ class LoginView extends Component {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
   };
-  handleOnChange = async e => {
+  handleOnChange = e => {
     const { name, value } = e.currentTarget;
-    await this.setState({ [name]: value });
+    this.setState({ [name]: value });
   };
   handeValidateOnBlur = e => {
     const { name } = e.currentTarget;

@@ -30,8 +30,6 @@ class RegisterView extends Component {
   handleOnChange = e => {
     const { name, value } = e.currentTarget;
     this.setState(state => ({ values: { ...state.values, [name]: value } }));
-
-    // this.setState({ [name]: value });
   };
   handeValidateOnBlur = e => {
     const { name } = e.currentTarget;
